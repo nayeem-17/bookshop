@@ -1,6 +1,6 @@
-package com.example.bookshop.model;
+package com.example.bookshop.model.entity;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -31,8 +31,8 @@ public class Book {
     private int year_of_publish;
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 }

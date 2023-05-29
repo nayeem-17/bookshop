@@ -1,4 +1,4 @@
-package com.example.bookshop;
+package com.example.bookshop.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.bookshop.model.Book;
+import com.example.bookshop.model.entity.Book;
+import com.example.bookshop.repository.BookRepository;
 
 @Service
 public class BookService {
@@ -31,9 +32,19 @@ public class BookService {
         Optional<Book> optionalBook = bookRepository.findById(id);
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();
-            book.setTitle(updatedBook.getTitle());
-            book.setAuthor(updatedBook.getAuthor());
-            // Update other fields as needed
+            if (updatedBook.getTitle() != null)
+                book.setTitle(updatedBook.getTitle());
+            if (updatedBook.getPrice() != null)
+                book.setPrice(updatedBook.getPrice());
+            if (updatedBook.getGenre() != null)
+                book.setGenre(updatedBook.getGenre());
+            if (updatedBook.getPublisher() != null)
+                book.setPublisher(updatedBook.getPublisher());
+            if (updatedBook.getYear_of_publish() > 0)
+                book.setYear_of_publish(updatedBook.getYear_of_publish());
+            if (updatedBook.getAuthor() != null)
+                book.setAuthor(updatedBook.getAuthor());
+            System.out.println(book);
             return bookRepository.save(book);
         }
         return null;
@@ -41,5 +52,9 @@ public class BookService {
 
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    public void deleteAllBooks() {
+        bookRepository.deleteAll();
     }
 }

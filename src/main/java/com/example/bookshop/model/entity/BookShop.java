@@ -1,6 +1,6 @@
-package com.example.bookshop.model;
+package com.example.bookshop.model.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,23 +16,23 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Author {
+public class BookShop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private int id;
-
-    private String name;
-    private String email;
-    // @Column(name = "contact_information")
-    private String contactNo;
-    private String address;
+    private int shopNumber;;
+    private String shopName;
+    private String location;
     @OneToMany(targetEntity = Book.class)
     private List<Book> books;
+    // = new ArrayList<>();
+    private String contactNo;
+    private String email;
+
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 }
